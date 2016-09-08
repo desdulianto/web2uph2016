@@ -26,11 +26,16 @@
 		if ($_GET["nama"] == "" || $_GET["mkuliah"] == "" || $_GET["nilai"] == "") {
 			$hasil = "Data salah";
 		} else {
-			if ($_GET["nilai"] >= 0 && $_GET["nilai"] <= 100) {
-				if ($_GET["nilai"] >= 60) {
-					$hasil = "Lulus";
+			$nilai = $_GET["nilai"];
+			if (is_numeric($nilai)) {
+				if ($_GET["nilai"] >= 0 && $_GET["nilai"] <= 100) {
+					if ($_GET["nilai"] >= 60) {
+						$hasil = "Lulus";
+					} else {
+						$hasil = "Tidak Lulus";
+					}				
 				} else {
-					$hasil = "Tidak Lulus";
+					$hasil = "Nilai salah";
 				}
 			} else {
 				$hasil = "Nilai salah";
