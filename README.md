@@ -7,3 +7,4 @@ Daftar isi directory:
 2 -- variabel, operator, percabangan if
 3 -- percabangan switch, loop for(each), while, do while, array (multidimensi, 
         asosiatif)
+4 -- fungsi array, user defined function, require (include)
