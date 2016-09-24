@@ -11,10 +11,23 @@
         thead tr { background-color: #5DFF50; }
         tbody tr.odd { background-color: #FFEAB4; }
         tbody tr.even { background-color: #98E8FF; }
+        form { margin: 1em; }
     </style>
 </head>
 <body>
     <h1>Jadwal KA Sumatra Utara</h1>
+
+    <form method="get" action="">
+        <label for="tujuan">Tujuan:</label>
+        <select name="tujuan">
+            <option value="">Kemana saja</option>
+            <option value="Medan">Medan</option>
+            <option value="Siantar">Siantar</option>
+            <option value="Tanjung Balai">Tanjung Balai</option>
+            <option value="Rantauprapat">Rantauprapat</option>
+        </select>
+        <input type="submit" value="Saring">
+    </form>
 
 <?php
 // include-kan file php yang berisi array data
@@ -37,11 +50,21 @@ $row = "odd";
 $cols = array('stasiun_keberangkatan', 'waktu_keberangkatan', 
               'stasiun_kedatangan', 'waktu_kedatangan', 'nama_ka');
 
+// baca data yang dikirim oleh user (jika ada)
+$tujuan = "";
+if (isset($_GET["tujuan"]))
+    $tujuan = $_GET["tujuan"];
+
 foreach ($data as $item) {
     echo "<tr class=\"$row\">";
 
     // menampilkan kolom sesuai dengan key yang ada di $cols
     foreach ($cols as $col) {
+        // filter dengan if hanya menampilkan stasiun kedatangan sesuai dengan
+        // yang dipilih user. Jika tujuan = "" tampilkan semua jadwal
+        if ($tujuan != "" && $tujuan != $item['stasiun_kedatangan'])
+            continue;
+
         echo "<td>" . $item[$col] . "</td>";
     }
     echo "</tr>";
