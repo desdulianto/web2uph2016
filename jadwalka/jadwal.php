@@ -17,23 +17,36 @@
 <body>
     <h1>Jadwal KA Sumatra Utara</h1>
 
-    <form method="get" action="">
-        <label for="tujuan">Tujuan:</label>
-        <select name="tujuan">
-            <option value="">Kemana saja</option>
-            <option value="Medan">Medan</option>
-            <option value="Siantar">Siantar</option>
-            <option value="Tanjung Balai">Tanjung Balai</option>
-            <option value="Rantauprapat">Rantauprapat</option>
-        </select>
-        <input type="submit" value="Saring">
-    </form>
 
 <?php
 // include-kan file php yang berisi array data
 // jadwal KA
 require_once "dataka.php";
 
+// bentuk list berisikan daftar stasiun tujuan untuk digunakan pada pilihan di
+// form
+$daftar_tujuan = array();
+
+foreach ($data as $item) {
+    if (! in_array($item['stasiun_kedatangan'], $daftar_tujuan))
+        array_push($daftar_tujuan, $item['stasiun_kedatangan']);
+}
+?>
+    <form method="get" action="">
+        <label for="tujuan">Tujuan:</label>
+        <select name="tujuan">
+            <option value="">Kemana saja</option>
+<?php
+// tambahkan option sesuai dengan array $daftar_tujuan
+foreach ($daftar_tujuan as $t) {
+    echo "<option value=\"$t\">$t</option>";
+}
+?>
+        </select>
+        <input type="submit" value="Saring">
+    </form>
+
+<?php
 // tampilkan tabel jadwal data ka
 echo "<table>";
 echo "<thead>";
