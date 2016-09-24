@@ -32,14 +32,18 @@ echo "<tbody>";
 
 // untuk class tr per masing-masing baris
 $row = "odd";
+
+// key untuk loop terhadap kolom data
+$cols = array('stasiun_keberangkatan', 'waktu_keberangkatan', 
+              'stasiun_kedatangan', 'waktu_kedatangan', 'nama_ka');
+
 foreach ($data as $item) {
     echo "<tr class=\"$row\">";
-    // tampilkan masing2 kolom secara manual
-    echo "<td>" . $item['stasiun_keberangkatan'] . "</td>";
-    echo "<td>" . $item['waktu_keberangkatan'] . "</td>";
-    echo "<td>" . $item['stasiun_kedatangan'] . "</td>";
-    echo "<td>" . $item['waktu_kedatangan'] . "</td>";
-    echo "<td>" . $item['nama_ka'] . "</td>";
+
+    // menampilkan kolom sesuai dengan key yang ada di $cols
+    foreach ($cols as $col) {
+        echo "<td>" . $item[$col] . "</td>";
+    }
     echo "</tr>";
 
     // flip class tr odd even
