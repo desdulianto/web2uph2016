@@ -68,16 +68,22 @@ $tujuan = "";
 if (isset($_GET["tujuan"]))
     $tujuan = $_GET["tujuan"];
 
-foreach ($data as $item) {
+// filter array $data sesuai dengan tujuan yang diinginkan user
+// fungsi ini memanggil callback function yang menggunakan variable
+// $tujuan sebagai kondisi filter.
+// ini adalah contoh kode program fungsional dimana fungsi dapat
+// diperperlakukan seperti variable (first class function/high order function)
+$data2 = array_filter($data, function ($item) use ($tujuan) {
+    if ($tujuan == "")
+        return true;
+    return $item['stasiun_kedatangan'] == $tujuan;
+});
+
+foreach ($data2 as $item) {
     echo "<tr class=\"$row\">";
 
     // menampilkan kolom sesuai dengan key yang ada di $cols
     foreach ($cols as $col) {
-        // filter dengan if hanya menampilkan stasiun kedatangan sesuai dengan
-        // yang dipilih user. Jika tujuan = "" tampilkan semua jadwal
-        if ($tujuan != "" && $tujuan != $item['stasiun_kedatangan'])
-            continue;
-
         echo "<td>" . $item[$col] . "</td>";
     }
     echo "</tr>";
