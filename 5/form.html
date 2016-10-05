@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Form</title>
+    <style type="text/css">
+        label {display: inline-block; width: 150px; vertical-align: top; }
+        div.checkbox { display: inline-block; }
+        form div { margin: 0.5em; }
+    </style>
+</head>
+<body>
+    <h1>POST Request</h1>
+    <p>Form ini menggunakan method post untuk mengirimkan data untuk diproses 
+    oleh script di web server.</p>
+    <p>Request post mengirimkan data di dalam body request.</p>
+    <p>Biasanya digunakan apabila data yang dikirim jumlahnya besar, atau 
+    merupakan data binary atau tidak menginginkan data yang dikirim di-encode
+    pada URL address bar.</p>
+    <p>Untuk proses upload dokumen (gambar atau file lainnya) hanya bisa 
+    dilakukan melalui request POST</p>
+    <form method="post" action="post.php">
+        <div>
+            <label for="nama">Nama</label>
+            <input type="text" name="nama">
+        </div>
+        <div>
+            <label for="jenis_kelamin">Jenis Kelamin</label>
+            <input type="radio" name="jenis_kelamin" value="pria" checked> Pria
+            <input type="radio" name="jenis_kelamin" value="wanita"> Wanita
+        </div>
+        <div>
+            <label for="pendidikan">Pendidikan</label>
+            <select name="pendidikan">
+                <option value="sd">SD</option>
+                <option value="smp">SMP</option>
+                <option value="sma">SMA</option>
+                <option value="s1">Sarjana</option>
+                <option value="s2">Magister</option>
+                <option value="s3">Doktor</option>
+            </select>
+        </div>
+        <div>
+            <label for="hobi">Hobi</label>
+            <div class="checkbox">
+                <input type="checkbox" name="hobi[]" value="makan"> Makan<br>
+                <input type="checkbox" name="hobi[]" value="travel"> Traveling<br>
+                <input type="checkbox" name="hobi[]" value="berenang"> Berenang<br>
+            </div>
+        </div>
+        <div>
+            <label for="keterangan">Keterangan</label>
+            <textarea name="keterangan" cols="50" rows="25"></textarea>
+        </div>
+        <div>
+            <input type="submit" value="Kirim">
+        </div>
+    </form> 
+    <h1>GET Request</h1>
+    <p>Form ini menggunakan method get untuk mengirimkan data untuk diproses 
+    oleh script di web server.</p>
+    <p>Request get mengirimkan data dalam bentuk yang di encode (url-encoded) 
+    pada URL address bar.</p>
+    <p>Request GET biasanya digunakan apabila request atau alamat URL request
+    diinginkan untuk bisa dibookmark oleh user (misalnya halaman detail produk, 
+    berita, dll).</p>
+    <form method="get" action="get.php">
+        <div>
+            <label for="nama">Nama</label>
+            <input type="text" name="nama">
+        </div>
+        <div>
+            <label for="lahir">Tanggal Lahir</label>
+            <input type="date" name="lahir" placeholder="mm/dd/yyyy">
+        </div>
+        <div>
+            <input type="submit" value="Kirim">
+        </div>
+    </form> 
+    <h1>GET & POST Request</h1>
+    <p>Form ini menggunakan method get dan post ke web server.</p>
+    <p>Form tetap menggunakan method post, hanya pada atribut action diisikan
+    dengan variable get yang akan dikirim ke server.</p>
+    <p>Pada sisi server, variable data request dapat diakses melalui varible
+    $_POST untuk data form, $_GET untuk data yang dkirim melalui url action
+    dan $_REQUEST untuk mengakses semua variable request baik yang POST maupun
+    yang GET.</p>
+    <form method="post" action="request.php?mode=zodiak">
+        <div>
+            <label for="nama">Nama</label>
+            <input type="text" name="nama">
+        </div>
+        <div>
+            <label for="lahir">Tanggal Lahir</label>
+            <input type="date" name="lahir" placeholder="mm/dd/yyyy">
+        </div>
+        <div>
+            <input type="submit" value="Kirim">
+        </div>
+    </form> 
+</body>
+</html>
