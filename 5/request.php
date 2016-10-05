@@ -63,7 +63,7 @@ if (check_request("request", array("nama", "lahir", "mode"))) {
             echo "<p>Hello $nama, bintang/zodiak anda adalah: $bintang.</p>";
             break;
         default:
-            echo "<p>Mau menampilkan apa ya?</p>";
+            echo "<p>Mau menampilkan apa ya? umur atau zodiak?</p>";
     }
 } else {
     echo "<p>Data belum diisi.</p>";
