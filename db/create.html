@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contoh menambah data ke database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Menambah data produk</h1>
+
+    <form method="post" action="create.php" enctype="multipart/form-data">
+        <div>
+            <label>Nama Produk:</label>
+            <input type="text" name="nama" placeholder="Nama Produk">
+        </div>
+        <div>
+            <label>Harga Produk:</label>
+            <input type="number" name="harga" placeholder="Harga">
+        </div>
+        <div>
+            <input type="submit" value="Tambah">
+        </div>
+    </form>
+</body>
+</html>
