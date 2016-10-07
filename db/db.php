@@ -1,6 +1,8 @@
 <?php
 require_once "config.php";
 
+// fungsi untuk membuka koneksi ke database sesuai dengan
+// konfigurasi di config.php
 function konek_db() {
     global $DB;
 

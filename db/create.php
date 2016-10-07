@@ -13,6 +13,7 @@ if (isset($_POST["nama"]) && isset($_POST["harga"])) {
     $nama  = $_POST["nama"];
     $harga = $_POST["harga"];
 
+    // buka koneksi ke db -- db.php
     $conn = konek_db();
 
     // bangun query yang akan dieksekusi menggunakan prepared statement
