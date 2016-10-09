@@ -23,4 +23,20 @@ function konek_db() {
 
     return $conn;
 }
+
+// fungsi untuk mencari produk berdasarkan id produk
+// $conn -- object koneksi database
+// $id   -- id produk yang dicari
+// return false jika query gagal
+// return object result set yang berisikan produk yang dicari
+function get_produk_by_id($conn, $id) {
+    $query = $conn->prepare("select * from produk where id=?");
+    $query->bind_param("i", $id);
+    $result = $query->execute();
+
+    if (! $result)
+        return false;
+
+    return $query->get_result();
+}
 ?>

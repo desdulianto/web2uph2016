@@ -17,6 +17,7 @@
             <th>Nama Produk</th>
             <th>Harga</th>
             <!--<th>Image</th>-->
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -42,6 +43,9 @@ require_once "db.php";
         echo "<td>$row->id</td>";
         echo "<td>$row->nama</td>";
         echo "<td>$row->harga</td>";
+        echo "<td>";
+        echo "<a href=\"edit.php?id=$row->id\"><button>Edit</button></a>";
+        echo "</td>";
         echo "</tr>";
     }
 ?>
