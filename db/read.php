@@ -40,6 +40,7 @@ require_once "db.php";
     // loop setiap baris result set sebagai object
     while ($row = $rows->fetch_object()) {
         $url_edit   = "edit.php?id=$row->id";
+        $url_delete = "delete.php?id=$row->id";
 
         echo "<tr>";
         echo "<td>$row->id</td>";
@@ -47,6 +48,7 @@ require_once "db.php";
         echo "<td>$row->harga</td>";
         echo "<td>";
         echo "<a href=\"$url_edit\"><button>Edit</button></a>";
+        echo "<a href=\"$url_delete\"><button>Delete</button></a>";
         echo "</td>";
         echo "</tr>";
     }
