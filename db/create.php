@@ -41,5 +41,6 @@ if (isset($_POST["nama"]) && isset($_POST["harga"])) {
     echo "<p>Data produk belum diisi!</p>";
 }
 ?>
+<p><a href="read.php">Kembali ke daftar produk</a></p>
 </body>
 </html>
