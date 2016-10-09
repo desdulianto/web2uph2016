@@ -39,12 +39,14 @@ require_once "db.php";
 
     // loop setiap baris result set sebagai object
     while ($row = $rows->fetch_object()) {
+        $url_edit   = "edit.php?id=$row->id";
+
         echo "<tr>";
         echo "<td>$row->id</td>";
         echo "<td>$row->nama</td>";
         echo "<td>$row->harga</td>";
         echo "<td>";
-        echo "<a href=\"edit.php?id=$row->id\"><button>Edit</button></a>";
+        echo "<a href=\"$url_edit\"><button>Edit</button></a>";
         echo "</td>";
         echo "</tr>";
     }
