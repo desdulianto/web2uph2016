@@ -17,7 +17,7 @@ function konek_db() {
     // buka database yang akan dioperasikan
     // parameter 1, object koneksi
     // parameter 2, nama database yang akan dibuka
-    $db = mysqli_select_db($conn, $DB['db']);
+    $db = $conn->select_db($DB['db']);
     if (! $db)
         die("<p>Tidak dapat membuka database.</p>");
 
