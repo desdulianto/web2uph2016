@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contoh Upload</title>
+</head>
+<body>
+    <form method="post" action="upload.php" enctype="multipart/form-data">
+        <p>Untuk meng-upload file, form harus dibuat dengan method="post" dan
+        dengan tambahan atribut enctype="multipart/form-data"</p>
+        <p>Untuk membatasi jenis file yang dapat diupload, tambahkan atribut 
+        accept pada input type="file" yang diisikan dengan extension file yang 
+        diperbolehkan</p>
+        <div>
+            <label>File upload:</label>
+            <input type="file" name="berkas" accept=".jpg,.png">
+        </div>
+        <div>
+            <input type="submit" value="Upload">
+        </div>
+</body>
+</html>
