@@ -43,7 +43,8 @@ if (isset($_POST["nama"]) && isset($_POST["harga"])) {
             $imgname = get_upload_filename($path, $filename, $ext);
 
             move_uploaded_file($image['tmp_name'], $imgname);
-        } else {
+        // error 4 tidak ada file yang di upload
+        } else if ($image['error'] != 4) {
             die("<p>Ada masalah dengan upload file</p>");
         }
     }
