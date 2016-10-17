@@ -45,7 +45,7 @@ $harga = $row->harga;
         </div>
         <div>
             <input type="submit" value="Update">
-            <a href="read.php">Batal</a>
+            <a href="read.php"><button type="button">Batal</button></a>
         </div>
     </form>
 
