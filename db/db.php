@@ -39,4 +39,27 @@ function get_produk_by_id($conn, $id) {
 
     return $query->get_result();
 }
+
+// fungsi untuk menghasilkan nama file yang diupload user ke server
+// $path     - lokasi directory tempat upload file
+// $filename - nama file yang diupload
+// $ext      - extension file yang diupload
+// kembalikan $filename.$ext apabila file belum ada di dalam $path
+// kembalikan $filename-$n.$ext apabila sudah ada file di dalam $path
+//      $n adalah nomor urut 1,2,3,...
+function get_upload_filename($path, $filename, $ext) {
+    $fullname = "$path/$filename.$ext";
+    if (! file_exists($fullname))
+        return $fullname;
+
+    $n = 1;
+    do {
+        $fullname = "$path/$filename-$n.$ext";
+        if (file_exists($fullname))
+            $n++;
+        else
+            return $fullname;
+    } while (true);
+}
+
 ?>

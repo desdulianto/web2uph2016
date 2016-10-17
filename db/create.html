@@ -8,6 +8,8 @@
 <body>
     <h1>Menambah data produk</h1>
 
+    <!-- untuk upload file, method form harus post dan harus ditambahkan
+         atribute enctype="multipart/form-data" -->
     <form method="post" action="create.php" enctype="multipart/form-data">
         <div>
             <label>Nama Produk:</label>
@@ -16,6 +18,13 @@
         <div>
             <label>Harga Produk:</label>
             <input type="number" name="harga" placeholder="Harga">
+        </div>
+        <div>
+            <label>Image Produk:</label>
+            <!-- jenis file yang diupload dapat dibatasi dengan atribut accept
+                 diisikan dengan extension file (.jpg, .png) atau dengan
+                 mime type (image/*, video/*) -->
+            <input type="file" name="image" accept="image/*">
         </div>
         <div>
             <input type="submit" value="Tambah">
