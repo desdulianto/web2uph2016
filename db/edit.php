@@ -50,6 +50,7 @@ if ($row->image)
             <label>Image Produk:</label>
             <input type="file" name="image" accept="image/*">
             <img src="<?php echo $image; ?>">
+            <a href="delete_image.php?id=<?php echo $id; ?>"><button type="button">Hapus Image</button></a>
         </div>
         <div>
             <input type="submit" value="Update">
