@@ -16,7 +16,7 @@
             <th>id</th>
             <th>Nama Produk</th>
             <th>Harga</th>
-            <!--<th>Image</th>-->
+            <th>Image</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -42,10 +42,15 @@ require_once "db.php";
         $url_edit   = "edit.php?id=$row->id";
         $url_delete = "delete.php?id=$row->id";
 
+        $image = "images/no_image_available.png";
+        if ($row->image != null)
+            $image = $row->image;
+
         echo "<tr>";
         echo "<td>$row->id</td>";
         echo "<td>$row->nama</td>";
         echo "<td>$row->harga</td>";
+        echo "<td><img src=\"$image\"></td>";
         echo "<td>";
         echo "<a href=\"$url_edit\"><button>Edit</button></a>";
         echo "<a href=\"$url_delete\"><button>Delete</button></a>";
