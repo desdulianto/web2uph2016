@@ -15,3 +15,5 @@ Langkah-langkah untuk menjalankan contoh ini adalah:
 4. Edit file config.php, sesuaikan nama host, nama user, password dan
    nama database sesuai dengan konfigurasi komputer lokal anda.
 5. Setelah seluruh settingan selesai, buka web ke URL create.html
+
+Start dari: read.php
