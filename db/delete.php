@@ -25,6 +25,11 @@ if (! $rows)
 if ($rows->num_rows == 0)
     die("<p>Produk id $id tidak ditemukan</p>");
 
+// ambil image produk, jika ada file image, hapus file image produk
+$produk = $rows->fetch_object();
+if ($produk->image)
+    unlink($produk->image);
+
 // delete data produk
 $query = $conn->prepare("delete from produk where id=?");
 $query->bind_param("i", $id);
