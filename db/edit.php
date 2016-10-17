@@ -30,6 +30,9 @@ if ($rows->num_rows == 0)
 $row = $rows->fetch_object();
 $nama = $row->nama;
 $harga = $row->harga;
+$image = "images/no_image_available.png";
+if ($row->image)
+    $image = $row->image;
 ?>
 
     <form method="post" action="update.php?id=<?php echo $id; ?>" enctype="multipart/form-data">
@@ -42,6 +45,11 @@ $harga = $row->harga;
             <label>Harga Produk:</label>
             <input type="number" name="harga" placeholder="Harga" 
                 value="<?php echo $harga; ?>">
+        </div>
+        <div>
+            <label>Image Produk:</label>
+            <input type="file" name="image" accept="image/*">
+            <img src="<?php echo $image; ?>">
         </div>
         <div>
             <input type="submit" value="Update">
