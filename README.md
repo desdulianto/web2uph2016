@@ -9,3 +9,5 @@ Daftar isi directory:
     asosiatif)
 * 4 -- fungsi array, user defined function, require (include)
 * 5 -- web form dan request handling (POST, GET)
+* 6 -- upload file dan cookie
+* 7 -- session
