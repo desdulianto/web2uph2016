@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Contoh Template</title>
+        <style type="text/css">
+            div { margin: 0.3em; }
+        </style>
+    </head>
+    <body>
+        {% if nama is defined %}
+            {% if nama|length == 0 %}
+                {% set nama = "world" %}
+            {% endif %}
+            <h1>Hello, {{nama}}</h1>
+        {% endif %}
+        <form method="get" action="index.php">
+            <div>
+                <label>Nama:</label>
+                <input type="text" name="nama">
+            </div>
+            <div>
+                <input type="submit" value="Proses">
+            </div>
+        </form>
+    </body>
+</html>

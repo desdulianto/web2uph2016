@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block style %}
+<style type="text/css">
+    table { border: 1px solid black;
+            border-collapse: collapse; }
+    td,th { border: 1px solid black; padding: 0.3em; }
+</style>
+{% endblock %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>No.</th>
+        {% for column in columns %}
+        <th>{{column}}</th>
+        {% endfor %}
+    </tr>
+{% for item in items %}
+    <tr>
+        <td>{{loop.index}}</td>
+        {% for column in columns|keys %}
+        <td>{{ attribute(item, column) }}</td>
+        {% endfor %}
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}
