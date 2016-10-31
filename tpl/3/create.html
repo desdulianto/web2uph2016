@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contoh menambah data ke database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Menambah data produk</h1>
+
+    <!-- untuk upload file, method form harus post dan harus ditambahkan
+         atribute enctype="multipart/form-data" -->
+    <form method="post" action="create.php" enctype="multipart/form-data">
+        <div>
+            <label>Nama Produk:</label>
+            <input type="text" name="nama" placeholder="Nama Produk">
+        </div>
+        <div>
+            <label>Harga Produk:</label>
+            <input type="number" name="harga" placeholder="Harga">
+        </div>
+        <div>
+            <label>Image Produk:</label>
+            <!-- jenis file yang diupload dapat dibatasi dengan atribut accept
+                 diisikan dengan extension file (.jpg, .png) atau dengan
+                 mime type (image/*, video/*) -->
+            <input type="file" name="image" accept="image/*">
+        </div>
+        <div>
+            <input type="submit" value="Tambah">
+            <a href="index.php"><button type="button">Batal</button></a>
+        </div>
+    </form>
+</body>
+</html>

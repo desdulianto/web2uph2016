@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h1>Edit data produk</h1>
+
+<!-- untuk upload file, method form harus post dan harus ditambahkan
+     atribute enctype="multipart/form-data" -->
+<form method="post" action="update.php?id={{produk['id']}}" enctype="multipart/form-data">
+    <div>
+        <label>Nama Produk:</label>
+        <input type="text" name="nama" placeholder="Nama Produk" value="{{produk['nama']}}">
+    </div>
+    <div>
+        <label>Harga Produk:</label>
+        <input type="number" name="harga" placeholder="Harga" value="{{produk['harga']}}">
+    </div>
+    <div>
+        <label>Image Produk:</label>
+        <!-- jenis file yang diupload dapat dibatasi dengan atribut accept
+             diisikan dengan extension file (.jpg, .png) atau dengan
+             mime type (image/*, video/*) -->
+        <input type="file" name="image" accept="image/*">
+        <img src="{{produk['image']}}">
+    </div>
+    <div>
+        <input type="submit" value="Update">
+        <a href="index.php"><button type="button">Batal</button></a>
+    </div>
+</form>
+{% endblock %}

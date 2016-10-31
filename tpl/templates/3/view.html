@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block body %}
+<a href="create.php"><button>Tambah Produk</button></a>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nama Produk</th>
+        <th>Harga Satuan</th>
+        <th>Gambar Produk</th>
+        <th colspan="2">Action</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{item['id']}}</td>
+        <td>{{item['nama']}}</td>
+        <td>{{item['harga']}}</td>
+        <td><img src="{{item['image']}}" style="max-width: 300px"></td>
+        <td><a href="{{item['url_edit']}}"><button>Edit</button></a></td>
+        <td><a href="{{item['url_delete']}}"><button>Delete</button></a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
