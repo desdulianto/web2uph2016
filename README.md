@@ -11,3 +11,6 @@ Daftar isi directory:
 * 5 -- web form dan request handling (POST, GET)
 * 6 -- upload file dan cookie
 * 7 -- session
+* db -- database
+* tpl -- template engine
+* 11 -- javascript
