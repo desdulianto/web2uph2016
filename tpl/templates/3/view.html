@@ -17,8 +17,19 @@
         <td>{{item['harga']}}</td>
         <td><img src="{{item['image']}}" style="max-width: 300px"></td>
         <td><a href="{{item['url_edit']}}"><button>Edit</button></a></td>
-        <td><a href="{{item['url_delete']}}"><button>Delete</button></a></td>
+        <td><a href="{{item['url_delete']}}" onclick="return konfirmasi('Yakin dihapus?')"><button>Delete</button></a></td>
     </tr>
     {% endfor %}
 </table>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+function konfirmasi(pesan) {
+    lanjut = confirm(pesan);
+    if (! lanjut)
+        return false;
+    return true;
+}
+</script>
 {% endblock %}
