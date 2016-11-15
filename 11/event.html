@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contoh Event</title>
+</head>
+<body>
+    <input type="text" name="nama" id="nama">
+    <button type="button" onclick="klik()">Tekan</button>
+    <div id="output"></div>
+
+    <script type="text/javascript">
+        function klik() {
+            nama = document.getElementById("nama").value;
+
+            if (nama == "")
+                nama = "World";
+
+            output = document.getElementById("output");
+            output.innerHTML = "Hello, " + nama;
+        }
+    </script>
+</body>
+</html>

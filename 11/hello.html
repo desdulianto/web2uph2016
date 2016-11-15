@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contoh javascript</title>
+</head>
+<body>
+    <script type="text/javascript">
+        document.write("<h1>Hello from javascript</h1>");
+    </script>
+    <script type="text/javascript" src="hello.js"></script>
+    <script type="text/javascript">
+        function hello(nama) {
+            if (nama == "" || nama == undefined)
+                nama = "World";
+
+            document.write("<p>Hello, " + nama + "</p>");
+        }
+
+        nama = "Budi";
+        hello(nama);
+        hello();
+    </script>
+</body>
+</html>

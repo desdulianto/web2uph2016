@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contoh Array</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function displayOL(label, list) {
+            document.write("<p>" + label + "</p>");
+            document.write("<ol>");
+            for (i = 0; i < list.length; i++) {
+                document.write("<li>" + list[i] + "</li>");
+            }
+            document.write("</ol>");
+        }
+
+        nama = ["Budi", "Agus", "Iwan"];
+
+        displayOL("Nama", nama);
+
+        document.write("<p>Banyak data: " + nama.length + "</p>");
+
+        nama.push("Adi");
+        displayOL("Nama", nama);
+
+        nama.unshift("Deni");
+        displayOL("Nama", nama);
+
+        a = nama.shift();
+        displayOL("Nama", nama);
+
+        a = nama.pop();
+        displayOL("Nama", nama);
+
+        for (i in nama) {
+            document.write("<p>Nama " + i + ": " + nama[i] + "</p>");
+        }
+
+        s = nama.join(",");
+        document.write("<p>Nama: " + s + "</p>");
+
+        displayOL("Nama", s.split(","));
+    </script>
+</body>
+</html>
