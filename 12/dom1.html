@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contoh Dynamic HTML</title>
+</head>
+<body>
+	<ul id="output"></ul>
+	<button type="button" onclick="tambah()">Tambah</button>
+	<script type="text/javascript">
+	count = 0;
+	function tambah() {
+		output = document.getElementById("output");
+
+		count++;
+		if (count % 2 == 0)
+			color = "red";
+		else
+			color = "blue";
+		li = document.createElement("li");
+		li.innerHTML = count;
+		li.style.color = color;
+
+		// "tombol" hapus
+		span = document.createElement("button");
+		span.innerHTML = "x";
+		li.innerHTML += " ";
+		li.appendChild(span);
+
+		// tempelkan event handler onclick pada "tombol" hapus
+		span.onclick = function () {
+			this.parentNode.remove();
+		}
+
+		//output.appendChild(li);
+		output.insertBefore(li, output.firstChild);
+	}
+	</script>
+</body>
+</html>

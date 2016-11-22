@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contoh AJAX</title>
+</head>
+<body>
+	<label>Nama</label>
+	<input type="text" name="nama" id="nama">
+	<button type="button" onclick="hello()">Klik</button>
+	<div id="output"></div>
+
+	<script type="text/javascript">
+	function hello() {
+		// memeriksa apakah browser mendukung fungsi ajax
+		/*if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+            ajax = new XMLHttpRequest();
+        } else if (window.ActiveXObject) { // IE
+            try {
+                ajax = new ActiveXObject("Msxml2.XMLHTTP");
+            }
+            catch (e) {
+                try {
+                    ajax = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                catch (e) {}
+            }
+        }
+
+        if (!ajax) {
+            var out = document.getElementById("output");
+            out.innerHTML = "Browser tidak mendukung request AJAX!";
+            return false;
+        }*/
+        ajax = new XMLHttpRequest();
+
+        var nama = document.getElementById("nama");
+        var output = document.getElementById("output");
+        
+        ajax.onreadystatechange = function () {
+        	console.log(ajax.readyState);
+        	if (ajax.readyState == 4) {
+        		console.log("Sudah dapat balasan dari server, status: ", ajax.status);
+        		if (ajax.status == 200) {
+        			output.innerHTML = ajax.responseText;
+        		} else {
+        			output.innerHTML = "Error (" + ajax.status + ")";
+        		}
+        	} else {
+        		output.innerHTML = "Waiting...";
+        	}
+        }
+
+        ajax.open("get", "ajax.php?nama=" + nama.value, true);
+        ajax.send();
+        nama.value = "";
+        nama.focus();
+	}
+	</script>
+</body>
+</html>
