@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contoh AJAX dengan data XML</title>
+</head>
+<body>
+    <div id="output"></div>
+    <script type="text/javascript">
+        function empty(o) {
+            while (o.firstChild)
+                o.removeChild(o.firstChild);
+        }
+
+        function loadData() {
+            var ajax = new XMLHttpRequest();
+
+            var output = document.getElementById("output");
+
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4) {
+                    if (ajax.status == 200) {
+                        resp = ajax.responseXML;
+                        root = resp.documentElement;
+
+                        stats = root.querySelector('status');
+                        empty(output);
+
+                        if (stats.attributes["code"].value == "Success") {
+                            table = document.createElement("table");
+
+                            judul = ["ID", "Nama", "Harga", "Image"];
+
+                            baris = table.insertRow();
+
+                            for (i = 0; i < judul.length; i++) {
+                                kolom = baris.insertCell();
+                                kolom.innerHTML = judul[i];
+                            }
+
+                            data = root.querySelector("data");
+                            produks = data.querySelectorAll("produk");
+
+                            for (i = 0; i < produks.length; i++) {
+                                baris = table.insertRow();
+
+                                kolom = baris.insertCell();
+                                kolom.innerHTML = produks[i].attributes["id"].value;
+
+                                kolom = baris.insertCell();
+                                kolom.innerHTML = produks[i].querySelector("nama").innerHTML;
+
+                                kolom = baris.insertCell();
+                                kolom.innerHTML = produks[i].querySelector("harga").innerHTML;
+
+                                kolom = baris.insertCell();
+                                img = document.createElement("img");
+                                img.src = produks[i].querySelector("image").innerHTML;
+                                img.style["width"] = "240px";
+                                kolom.appendChild(img);
+                            }
+
+                            output.appendChild(table);
+                        } else {
+                            p = document.createElement("p");
+                            p.innerHTML = stats.innerHTML;
+                            output.appendChild(p);
+                        }
+                    }
+                }
+            }
+
+            ajax.open("get", "xml.php", true);
+            ajax.send();
+        }
+
+        document.ready = loadData();
+    </script>
+</body>
+</html>

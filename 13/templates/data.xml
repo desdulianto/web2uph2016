@@ -1,0 +1,19 @@
+{% extends "message.xml" %}
+
+{% block body %}
+    {{ parent() }}
+    <data>
+        {% for item in data %}
+            <produk id="{{item.id}}">
+                <nama>{{item.nama}}</nama>
+                <harga>{{item.harga}}</harga>
+                {% if item.image is null %}
+                {% set image = "images/no_image_available.png" %}
+                {% else %}
+                    {% set image = item.image %}
+                {% endif %}
+                <image>../tpl/3/{{image}}</image>
+            </produk>
+        {% endfor %}
+    </data>
+{% endblock %}
