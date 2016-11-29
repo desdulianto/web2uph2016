@@ -5,33 +5,17 @@ require_once "twig.php";
 // buka koneksi ke database -- menggunakan mysqli
 $conn = konek_db();
 
-// get page
 $limit = 2;
-$p = isset($_GET["p"]) ? $_GET["p"] : 1;
 
-// cek apakah ada yang disaring
-$q = isset($_GET["q"])? $_GET["q"] : null;
+$q = "%" . (isset($_GET["q"]) ? $_GET["q"] : "") . "%";
+$p = isset($_GET["p"]) ? intval($_GET["p"]) : 1;
 
-// query seluruh data produk dari database
-$stmt = "select * from produk";
-if ($q != null) {
-    $stmt .= " where nama like ?";
-}
+$offset = ($p * $limit) - $limit;	// ($p-1) * $limit
 
-// limit query
-$stmt .= " limit ? offset ?";
-
-// bind page query
-$page = ($p-1) * 2;
+$stmt = "select * from produk where nama like ? limit ? offset ?";
 
 $query = $conn->prepare($stmt);
-if ($q != null) {
-    $q = '%' . $q . '%';
-    $query->bind_param("sii", $q, $limit, $page);
-} else {
-    $query->bind_param("ii", $limit, $page);
-}
-
+$query->bind_param("sii", $q, $limit, $offset);
 $result = $query->execute();
 
 $error = false;
@@ -40,6 +24,9 @@ if (! $result) {
     $error = true;
     $pesan = "Gagal query";
 }
+
+
+
 
 // baca hasil query menjadi object result set
 $rows = $query->get_result();
@@ -64,34 +51,32 @@ while ($row = $rows->fetch_object()) {
     array_push($data, $item);
 }
 
-// query banyak page
-$stmt = "select count(*) as halaman from produk";
-if ($q != null)
-    $stmt .= " where nama like ?";
+$stmt = "select count(*) as halaman from produk where nama like ?";
 $query = $conn->prepare($stmt);
-if ($q != null)
-    $query->bind_param("s", $q);
+$query->bind_param("s", $q);
 $result = $query->execute();
 $rows = $query->get_result();
 $row = $rows->fetch_object();
-$page_count = ceil($row->halaman/$limit);
-$query = $_SERVER["QUERY_STRING"];
-$pages = array();
-// bangun url page
-if (strpos($query, "p=$p")) {
-    for ($page = 0; $page < $page_count; $page++) {
-        $url = str_replace("p=$p", "p=" . ($page+1), $query);
-        array_push($pages, $url);
-    }
-} else {
-    for ($page = 0; $page < $page_count; $page++) {
-        $url = $query . "&p=" . ($page + 1);
-        array_push($pages, $url);
-    }
+$pages = ceil($row->halaman / $limit);
+
+// bangun url baru untuk pages filter
+$q_s = $_SERVER["QUERY_STRING"];
+$page_urls = array();
+for ($page = 1; $page <= $pages; $page++) {
+	if (strpos($q_s, "p=$p")) {
+		$url = "?" . str_replace("p=$p", "p=" . $page, $q_s);
+	} else {
+		$url = "?" . $q_s . "&p=$page";
+	}
+	array_push($page_urls, $url);
+}
+
+if ($p < 1 || $p > $pages) {
+	die($twig->render("error.html", array("pesan"=>"Page not found")));
 }
 
 if (! $error)
-    echo $twig->render("view.html", array("items"=>$data, "pages"=>$pages));
+    echo $twig->render("view.html", array("items"=>$data, "pages"=>$pages, "p"=>$p, "page_urls" => $page_urls));
 else
     echo $twig->render("error.html", array("pesan"=>$pesan));
 ?>

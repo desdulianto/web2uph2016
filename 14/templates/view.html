@@ -6,7 +6,7 @@
 <form method="get" action="index.php">
     <div>
         <label>Saring: </label>
-        <input type="text" name="q">
+        <input type="text" name="q" id="q" onkeyup="suggest()">
         <input type="submit" value="Saring">
     </div>
 </form>
@@ -30,10 +30,15 @@
     {% endfor %}
 </table>
 <ul>
-{% for page in pages %}
-    <li><a href="?{{page}}">{{loop.index}}</a></li>
+{% for url in page_urls %}
+	{% if p == loop.index %}
+	<li>{{loop.index}}</li>
+	{% else %}
+	<li><a href="{{url}}">{{loop.index}}</a></li>
+	{% endif %}
 {% endfor %}
 </ul>
+<div id="suggestions"></div>
 {% endblock %}
 
 {% block script %}
@@ -43,6 +48,40 @@ function konfirmasi(pesan) {
     if (! lanjut)
         return false;
     return true;
+}
+
+function clear(elem) {
+	while (elem.firstChild) {
+		elem.removeChild(elem.firstChild);
+	}
+}
+
+function suggest() {
+	var xhr = new XMLHttpRequest();
+	var q = document.getElementById("q");
+	var suggestions = document.getElementById("suggestions");
+
+	clear(suggestions);
+
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				s = JSON.parse(xhr.responseText);
+				console.log(s.suggestions.length);
+				
+				for (i = 0; i < s.suggestions.length; i++) {
+					p = document.createElement("p");
+					p.innerHTML = s.suggestions[i];
+					suggestions.appendChild(p);
+				}
+			}
+		}
+	}
+
+	data = new FormData();
+	data.append("q", q.value);
+	xhr.open("post", "suggest.php", true);
+	xhr.send(data);
 }
 </script>
 {% endblock %}
