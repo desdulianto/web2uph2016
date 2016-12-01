@@ -61,22 +61,16 @@ $pages = ceil($row->halaman / $limit);
 
 // bangun url baru untuk pages filter
 $q_s = $_SERVER["QUERY_STRING"];
-$page_urls = array();
-for ($page = 1; $page <= $pages; $page++) {
-	if (strpos($q_s, "p=$p")) {
-		$url = "?" . str_replace("p=$p", "p=" . $page, $q_s);
-	} else {
-		$url = "?" . $q_s . "&p=$page";
-	}
-	array_push($page_urls, $url);
-}
+$q_s = str_replace("&p=$p", "", $q_s);
+$q_s = str_replace("p=$p", "", $q_s);
 
 if ($p < 1 || $p > $pages) {
 	die($twig->render("error.html", array("pesan"=>"Page not found")));
 }
 
 if (! $error)
-    echo $twig->render("view.html", array("items"=>$data, "pages"=>$pages, "p"=>$p, "page_urls" => $page_urls));
+    echo $twig->render("view.html", array("items"=>$data, "pages"=>$pages,
+        "p"=>$p, "base_query"=>$q_s, "q"=>$_GET["q"]));
 else
     echo $twig->render("error.html", array("pesan"=>$pesan));
 ?>
